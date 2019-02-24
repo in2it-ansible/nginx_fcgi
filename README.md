@@ -1,12 +1,14 @@
 Nginx FastCGI
 =============
 
+[![Build Status](https://travis-ci.org/in2it-ansible/nginx_fcgi.svg?branch=master)](https://travis-ci.org/in2it-ansible/nginx_fcgi)
+
 This role will setup a Nginx web server that passes incoming requests to a remote FastCGI application (using PHP-FPM).
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+No specific requirements needed
 
 Role Variables
 --------------
