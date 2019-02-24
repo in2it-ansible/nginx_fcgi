@@ -2,5 +2,5 @@
 # vars file for nginx_fcgi
 
 nginx_timezone: Europe/Brussels
-server_hostname: {{ inventory_hostname }}.foobar.com
+server_hostname: "{{ inventory_hostname }}.foobar.com"
 nginx_docroot: "/var/www/app"
