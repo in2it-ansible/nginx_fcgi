@@ -1,0 +1,63 @@
+---
+# tasks file for nginx_fcgi
+
+- name: Set timezone
+  timezone:
+    name: "{{ nginx_timezone }}"
+
+- name: Install Nginx key
+  apt_key:
+    id: "{{ nginx_apt_keyid }}"
+    url: "{{ nginx_apt_key }}"
+    state: present
+    keyring: /etc/apt/trusted.gpg.d/ansible.gpg
+  register: nginx_key_install
+  until: nginx_key_install is success
+  retries: 3
+  delay: 2
+
+- name: Add official Nginx repository
+  apt_repository:
+    repo: "{{ nginx_apt_list }}"
+    state: present
+    filename: "nginx"
+
+- name: Install nginx
+  apt:
+    name: "{{ package }}"
+    state: present
+    update_cache: true
+  register: nginx_install
+  until: nginx_install is success
+  retries: 3
+  delay: 2
+
+- name: Remove default config
+  file:
+    path: /etc/nginx/conf.d/default.conf
+    state: absent
+
+- name: Create app group
+  group:
+    name: php
+    state: present
+
+- name: Create app user
+  user:
+    name: php
+    group: php
+    state: present
+
+- name: Create app directory
+  file:
+    path: /var/www/app
+    state: directory
+    mode: 0755
+    owner: php
+    group: php
+
+- name: Set our own configuration
+  template:
+    src: nginx_fcgi.conf
+    dest: /etc/nginx/conf.d/www.conf
+  notify: restart nginx

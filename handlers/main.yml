@@ -1,0 +1,7 @@
+---
+# handlers file for nginx_fcgi
+
+- name: restart nginx
+  service:
+    name: nginx
+    state: restarted
