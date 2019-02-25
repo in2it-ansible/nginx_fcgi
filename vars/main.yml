@@ -4,3 +4,5 @@
 nginx_timezone: Europe/Brussels
 server_hostname: "{{ inventory_hostname }}.foobar.com"
 nginx_docroot: "/var/www/app"
+nginx_user_group: webapp
+nginx_user_name: webapp

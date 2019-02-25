@@ -39,13 +39,13 @@
 
 - name: Create app group
   group:
-    name: php
+    name: "{{ nginx_user_group }}"
     state: present
 
 - name: Create app user
   user:
-    name: php
-    group: php
+    name: "{{ nginx_user_name }}"
+    group: "{{ nginx_user_group }}"
     state: present
 
 - name: Create app directory
@@ -53,8 +53,8 @@
     path: /var/www/app
     state: directory
     mode: 0755
-    owner: php
-    group: php
+    owner: "{{ nginx_user_name }}"
+    group: "{{ nginx_user_group }}"
 
 - name: Set our own configuration
   template:

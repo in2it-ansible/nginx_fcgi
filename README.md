@@ -21,6 +21,8 @@ The following variables are used within the role defined in `defaults/main.yml` 
 - **nginx_apt_list:** The Nginx repository (default: "deb http://nginx.org/packages/debian {{ ansible_lsb.codename }} nginx")
 - **server_hostname:** Setting the hostname Nginx will listen to (default: {{ inventory_hostname }}.example.com)
 - **nginx_docroot:** The document root of the application to display content (default: "/var/www/app")
+- **nginx_user_group:** The user group used for the web application (default: webapp)
+- **nginx_user_name:** The user name used for the web application (default: webapp)
 - **package:** The package to install (default: nginx)
 
 The following variables are used in `templates/nginx_fcgi.conf`:
@@ -36,8 +38,8 @@ Example Inventory
 -----------------
 
     [all]
-    web1 ansible_host=192.168.2.1 ansible_user=vagrant ansible_ssh_private_key_file=.vagrant/machines/web1/virtualbox/private_key ansible_ssh_common_args="-o 'StrictHostKeyChecking no'"
-    web2 ansible_host=192.168.2.2 ansible_user=vagrant ansible_ssh_private_key_file=.vagrant/machines/web2/virtualbox/private_key ansible_ssh_common_args="-o 'StrictHostKeyChecking no'"
+    web1 ansible_host=192.168.2.1
+    web2 ansible_host=192.168.2.2
     
     [web]
     web1
